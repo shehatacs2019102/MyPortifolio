@@ -13,26 +13,19 @@ function App() {
       title: 'E-Commerce Platform',
       description: 'Full-stack e-commerce solution with real-time order processing',
       tech: ['React', 'PHP', 'MySQL', 'GraphgQL'],
-      link: 'http://shehatacs322.serv00.net/all'
+      link: 'https://ecommerce-backend-5443.infy.click/'
     },
     {
       title: 'Live Stream Service (StreamFlow)',
       description: 'A responsive front-end interface for a streaming service',
       tech: ['TypeScript', 'WebSocket', 'OpenAI', 'Redis'],
-      link: 'https://stream-flow1.netlify.app/'
-    },
-    
-    {
-      title: 'Mobile Fitness App',
-      description: 'Cross-platform mobile app for tracking workouts, nutrition, and health metrics',
-      tech: ['React Native', 'Expo', 'TypeScript'],
-      link: '#'
+      link: 'https://shehatacs2019102.github.io/StreamingService/'
     },
     {
-      title: 'Analytics Dashboard',
-      description: 'Interactive data visualization dashboard with custom charts and real-time updates',
-      tech: ['React', 'ChartJS', 'JSONAPI', 'Axios'],
-      link: 'https://shehatacs2019102.github.io/Dashboard/'
+      title: 'Readr',
+      description: 'A full-stack reading app with a Prisma-backed database',
+      tech: ['Next.js', 'React', 'Prisma', 'TypeScript'],
+      link: 'https://readr-5pb2tg4ar-shehata1.vercel.app/'
     },
   ];
 
