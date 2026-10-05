@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
-import { Code2, Mail, Github, Linkedin, ExternalLink, Terminal, Sparkles } from 'lucide-react';
+import { useState, useEffect, type MouseEvent } from 'react';
+import { Code2, Mail, Github, Linkedin, ExternalLink, Terminal } from 'lucide-react';
+import Scene3D from './Scene3D';
 
 function App() {
   const [isVisible, setIsVisible] = useState(false);
@@ -36,9 +37,22 @@ function App() {
     'Gnu/Linux'
   ];
 
+  const tilt = (e: MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    card.style.transform = `perspective(800px) rotateX(${-y * 12}deg) rotateY(${x * 12}deg) translateZ(10px)`;
+  };
+
+  const resetTilt = (e: MouseEvent<HTMLDivElement>) => {
+    e.currentTarget.style.transform = '';
+  };
+
   return (
     <div style={{ minHeight: '100vh', background: '#000', color: '#00ff41', position: 'relative', overflow: 'hidden' }}>
       <div className="gradient-bg" />
+      <Scene3D />
       <div className="scanline" />
 
       <nav>
@@ -83,7 +97,7 @@ function App() {
           </div>
         </section>
 
-        <section id="about" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '80px 24px' }}>
+        <section id="about">
           <div className="about-container">
             <h2 style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '48px', fontWeight: 'bold', marginBottom: '32px' }}>
               {/* <Sparkles style={{ width: '40px', height: '40px' }} /> */}
@@ -92,12 +106,12 @@ function App() {
             <div className="about-box">
               <p>{'>'} Hello! I'm a passionate full-stack web developer with expertise in building scalable web applications. I love turning complex problems into simple, beautiful, and intuitive solutions.</p>
               <p>{'>'} With several years of development experience , I've worked on projects ranging from e-commerce platforms to real-time applications, always focusing on performance, user experience, and maintainable code.</p>
-              <p>{'>'} When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community.</p>
+              <p>{'>'} When I'm not coding, you'll find me exploring new technologies or sharing knowledge with the developer community.</p>
             </div>
           </div>
         </section>
 
-        <section id="skills" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '80px 24px' }}>
+        <section id="skills">
           <div className="skills-container">
             <h2 className="neon-text" style={{ fontSize: '48px', fontWeight: 'bold', marginBottom: '48px', textAlign: 'center' }}>
               TECH_STACK
@@ -116,7 +130,7 @@ function App() {
           </div>
         </section>
 
-        <section id="projects" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '80px 24px' }}>
+        <section id="projects">
           <div className="projects-container">
             <h2 className="neon-text" style={{ fontSize: '48px', fontWeight: 'bold', marginBottom: '48px', textAlign: 'center' }}>
               FEATURED_PROJECTS
@@ -127,6 +141,8 @@ function App() {
                   key={project.title}
                   className="project-card"
                   style={{ animationDelay: `${index * 0.2}s` }}
+                  onMouseMove={tilt}
+                  onMouseLeave={resetTilt}
                 >
                   <h3>{project.title}</h3>
                   <p>{project.description}</p>
@@ -146,7 +162,7 @@ function App() {
           </div>
         </section>
 
-        <section id="contact" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '80px 24px' }}>
+        <section id="contact">
           <div className="contact-container">
             <h2 className="neon-text" style={{ fontSize: '48px', fontWeight: 'bold', marginBottom: '32px' }}>
               GET_IN_TOUCH
