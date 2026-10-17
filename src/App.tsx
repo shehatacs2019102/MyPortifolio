@@ -56,16 +56,16 @@ function App() {
       <div className="scanline" />
 
       <nav>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#00ff41', fontWeight: 'bold', fontSize: '20px' }}>
+        <div className="nav-content">
+          <div className="nav-logo">
             <Terminal style={{ width: '24px', height: '24px' }} />
             <span className="neon-text">My Portifolio</span>
           </div>
-          <div style={{ display: 'flex', gap: '24px' }}>
-            <a href="#about" style={{ color: '#00ff41', textDecoration: 'none', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = '#00dd2f'} onMouseLeave={(e) => e.currentTarget.style.color = '#00ff41'}>About</a>
-            <a href="#skills" style={{ color: '#00ff41', textDecoration: 'none', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = '#00dd2f'} onMouseLeave={(e) => e.currentTarget.style.color = '#00ff41'}>Skills</a>
-            <a href="#projects" style={{ color: '#00ff41', textDecoration: 'none', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = '#00dd2f'} onMouseLeave={(e) => e.currentTarget.style.color = '#00ff41'}>Projects</a>
-            <a href="#contact" style={{ color: '#00ff41', textDecoration: 'none', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = '#00dd2f'} onMouseLeave={(e) => e.currentTarget.style.color = '#00ff41'}>Contact</a>
+          <div className="nav-links">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
           </div>
         </div>
       </nav>
@@ -76,14 +76,14 @@ function App() {
             <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
               <Code2 style={{ width: '80px', height: '80px', color: '#00ff41' }} className="neon-glow pulse" />
             </div>
-            <h3  style={{ fontSize: 48, fontWeight: 'bold', marginBottom: '16px' }}>Abdelrahman Mohammed Shehata</h3>
+            <h3 style={{ fontSize: 'clamp(28px, 7vw, 48px)', fontWeight: 'bold', marginBottom: '16px' }}>Abdelrahman Mohammed Shehata</h3>
             <h1 className="neon-text" style={{ fontSize: 'clamp(48px, 10vw, 120px)', fontWeight: 'bold', marginBottom: '16px' }}>
               FULL STACK
             </h1>
             <h2 style={{ fontSize: 'clamp(32px, 8vw, 80px)', fontWeight: 'bold', marginBottom: '24px', color: '#00dd2f' }}>
               WEB DEVELOPER
             </h2>
-            <p style={{ fontSize: '20px', color: '#00bb33', marginBottom: '32px', maxWidth: '600px', margin: '0 auto 32px' }}>
+            <p style={{ fontSize: 'clamp(16px, 4vw, 20px)', color: '#00bb33', marginBottom: '32px', maxWidth: '600px', margin: '0 auto 32px' }}>
               Crafting innovative digital experiences with clean code and creative solutions
             </p>
             <div className="button-group">
@@ -99,7 +99,7 @@ function App() {
 
         <section id="about">
           <div className="about-container">
-            <h2 style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '48px', fontWeight: 'bold', marginBottom: '32px' }}>
+            <h2 style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: 'clamp(28px, 7vw, 48px)', fontWeight: 'bold', marginBottom: '32px' }}>
               {/* <Sparkles style={{ width: '40px', height: '40px' }} /> */}
               <span className="neon-text">ABOUT_ME</span>
             </h2>
@@ -113,7 +113,7 @@ function App() {
 
         <section id="skills">
           <div className="skills-container">
-            <h2 className="neon-text" style={{ fontSize: '48px', fontWeight: 'bold', marginBottom: '48px', textAlign: 'center' }}>
+            <h2 className="neon-text" style={{ fontSize: 'clamp(28px, 7vw, 48px)', fontWeight: 'bold', marginBottom: '48px', textAlign: 'center' }}>
               TECH_STACK
             </h2>
             <div className="skills-grid">
@@ -132,7 +132,7 @@ function App() {
 
         <section id="projects">
           <div className="projects-container">
-            <h2 className="neon-text" style={{ fontSize: '48px', fontWeight: 'bold', marginBottom: '48px', textAlign: 'center' }}>
+            <h2 className="neon-text" style={{ fontSize: 'clamp(28px, 7vw, 48px)', fontWeight: 'bold', marginBottom: '48px', textAlign: 'center' }}>
               FEATURED_PROJECTS
             </h2>
             <div className="projects-grid">
@@ -164,10 +164,10 @@ function App() {
 
         <section id="contact">
           <div className="contact-container">
-            <h2 className="neon-text" style={{ fontSize: '48px', fontWeight: 'bold', marginBottom: '32px' }}>
+            <h2 className="neon-text" style={{ fontSize: 'clamp(28px, 7vw, 48px)', fontWeight: 'bold', marginBottom: '32px' }}>
               GET_IN_TOUCH
             </h2>
-            <p style={{ fontSize: '20px', marginBottom: '48px', color: '#00dd2f' }}>
+            <p style={{ fontSize: 'clamp(16px, 4vw, 20px)', marginBottom: '48px', color: '#00dd2f' }}>
               Let's collaborate on your next project
             </p>
             <div className="contact-box">
