@@ -26,7 +26,7 @@ function App() {
       title: 'Readr',
       description: 'A full-stack reading app with a Prisma-backed database',
       tech: ['Next.js', 'React', 'Prisma', 'TypeScript'],
-      link: 'https://readr-5pb2tg4ar-shehata1.vercel.app/'
+      link: 'https://readr-snowy-chi.vercel.app/'
     },
   ];
 
