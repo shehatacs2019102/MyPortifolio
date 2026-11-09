@@ -1,6 +1,31 @@
-import { useState, useEffect, type MouseEvent } from 'react';
-import { Code2, Mail, Github, Linkedin, ExternalLink, Terminal } from 'lucide-react';
+import { useState, useEffect, type MouseEvent, type ReactNode } from 'react';
+import { Code2, Mail, Github, Linkedin, ExternalLink, Terminal, ChevronDown } from 'lucide-react';
 import Scene3D from './Scene3D';
+
+const GITHUB = 'https://github.com/shehatacs2019102';
+
+function Window({ title, children, className = '' }: { title: string; children: ReactNode; className?: string }) {
+  return (
+    <div className={`window ${className}`}>
+      <div className="window-bar">
+        <span className="dot dot-red" />
+        <span className="dot dot-yellow" />
+        <span className="dot dot-green" />
+        <span className="window-title">{title}</span>
+      </div>
+      <div className="window-body">{children}</div>
+    </div>
+  );
+}
+
+function SectionTitle({ num, children }: { num: string; children: ReactNode }) {
+  return (
+    <h2 className="section-title">
+      <span className="section-num">{num}.</span>
+      <span className="neon-text">{children}</span>
+    </h2>
+  );
+}
 
 function App() {
   const [isVisible, setIsVisible] = useState(false);
@@ -11,30 +36,43 @@ function App() {
 
   const projects = [
     {
-      title: 'E-Commerce Platform',
-      description: 'Full-stack e-commerce solution with real-time order processing',
-      tech: ['React', 'PHP', 'MySQL', 'GraphgQL'],
-      link: 'https://ecommerce-backend-5443.infy.click/'
+      title: 'Whiskers',
+      slug: 'whiskers',
+      description: 'A booking site for a cat care business. Pick a service, choose a date and time on a calendar, and book through a .NET API that blocks double bookings.',
+      tech: ['Angular', 'TypeScript', 'ASP.NET Core', 'SQLite'],
+      link: 'https://shehatacs2019102.github.io/WhIskers/',
+      source: `${GITHUB}/WhIskers`
     },
     {
-      title: 'Live Stream Service (StreamFlow)',
-      description: 'A responsive front-end interface for a streaming service',
+      title: 'E-Commerce Platform',
+      slug: 'ecommerce',
+      description: 'Full-stack e-commerce solution with real-time order processing',
+      tech: ['React', 'PHP', 'MySQL', 'GraphQL'],
+      link: 'https://ecommerce-backend-5443.infy.click/',
+      source: `${GITHUB}/scandiweb-fullstack-task`
+    },
+    {
+      title: 'StreamFlow',
+      slug: 'streamflow',
+      description: 'A responsive front-end interface for a live streaming service',
       tech: ['TypeScript', 'WebSocket', 'OpenAI', 'Redis'],
-      link: 'https://shehatacs2019102.github.io/StreamingService/'
+      link: 'https://shehatacs2019102.github.io/StreamingService/',
+      source: `${GITHUB}/StreamingService`
     },
     {
       title: 'Readr',
+      slug: 'readr',
       description: 'A full-stack reading app with a Prisma-backed database',
       tech: ['Next.js', 'React', 'Prisma', 'TypeScript'],
-      link: 'https://readr-snowy-chi.vercel.app/'
+      link: 'https://readr-snowy-chi.vercel.app/',
+      source: `${GITHUB}/Readr-dev`
     },
   ];
 
-  const skills = [
-    'JavaScript', 'TypeScript', 'React', 'Node.js',
-    'Python', 'SQL', 'PHP', 'Docker',
-    'AWS', 'Git', 'CSS', 'Laravel', 'GraphQL',
-    'Gnu/Linux'
+  const skillGroups = [
+    { name: 'frontend', skills: ['JavaScript', 'TypeScript', 'React', 'Angular', 'CSS'] },
+    { name: 'backend', skills: ['Node.js', 'PHP', 'Laravel', 'Python', '.NET', 'GraphQL', 'SQL'] },
+    { name: 'devops_tools', skills: ['Docker', 'AWS', 'Git', 'Gnu/Linux'] },
   ];
 
   const tilt = (e: MouseEvent<HTMLDivElement>) => {
@@ -42,7 +80,7 @@ function App() {
     const rect = card.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
-    card.style.transform = `perspective(800px) rotateX(${-y * 12}deg) rotateY(${x * 12}deg) translateZ(10px)`;
+    card.style.transform = `perspective(800px) rotateX(${-y * 8}deg) rotateY(${x * 8}deg) translateZ(10px)`;
   };
 
   const resetTilt = (e: MouseEvent<HTMLDivElement>) => {
@@ -57,10 +95,10 @@ function App() {
 
       <nav>
         <div className="nav-content">
-          <div className="nav-logo">
+          <a href="#top" className="nav-logo">
             <Terminal style={{ width: '24px', height: '24px' }} />
-            <span className="neon-text">My Portifolio</span>
-          </div>
+            <span className="neon-text">My Portfolio</span>
+          </a>
           <div className="nav-links">
             <a href="#about">About</a>
             <a href="#skills">Skills</a>
@@ -70,61 +108,62 @@ function App() {
         </div>
       </nav>
 
-      <main style={{ position: 'relative', zIndex: 10 }}>
-        <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '80px 24px' }}>
+      <main>
+        <section id="top" className="hero">
           <div className={isVisible ? 'fade-in' : 'fade-in-hidden'} style={{ textAlign: 'center' }}>
             <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
               <Code2 style={{ width: '80px', height: '80px', color: '#00ff41' }} className="neon-glow pulse" />
             </div>
-            <h3 style={{ fontSize: 'clamp(28px, 7vw, 48px)', fontWeight: 'bold', marginBottom: '16px' }}>Abdelrahman Mohammed Shehata</h3>
-            <h1 className="neon-text" style={{ fontSize: 'clamp(48px, 10vw, 120px)', fontWeight: 'bold', marginBottom: '16px' }}>
-              FULL STACK
-            </h1>
-            <h2 style={{ fontSize: 'clamp(32px, 8vw, 80px)', fontWeight: 'bold', marginBottom: '24px', color: '#00dd2f' }}>
-              WEB DEVELOPER
+            <p className="prompt"><span className="typed">&gt; whoami</span></p>
+            <p className="hero-name">Abdelrahman Mohammed Shehata</p>
+            <h1 className="neon-text hero-title">FULL STACK</h1>
+            <h2 className="hero-subtitle">
+              WEB DEVELOPER<span className="cursor" aria-hidden="true">_</span>
             </h2>
-            <p style={{ fontSize: 'clamp(16px, 4vw, 20px)', color: '#00bb33', marginBottom: '32px', maxWidth: '600px', margin: '0 auto 32px' }}>
+            <p className="hero-tagline">
               Crafting innovative digital experiences with clean code and creative solutions
             </p>
             <div className="button-group">
-            <a href='#projects' type="button" className='a-button' style={{ padding: '12px 32px', borderColor: 'rgba(0, 255, 65, 0.5)' }}>
-                View Projects
-              </a>
-              <a href='#contact' type="button" className='a-button' style={{ padding: '12px 32px', borderColor: 'rgba(0, 255, 65, 0.5)' }}>
-                Contact Me
-              </a>
+              <a href="#projects" className="a-button a-button-primary">View Projects</a>
+              <a href="#contact" className="a-button">Contact Me</a>
             </div>
           </div>
+          <a href="#about" className="scroll-hint" aria-label="Scroll to About">
+            <ChevronDown style={{ width: '28px', height: '28px' }} />
+          </a>
         </section>
 
         <section id="about">
           <div className="about-container">
-            <h2 style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: 'clamp(28px, 7vw, 48px)', fontWeight: 'bold', marginBottom: '32px' }}>
-              {/* <Sparkles style={{ width: '40px', height: '40px' }} /> */}
-              <span className="neon-text">ABOUT_ME</span>
-            </h2>
-            <div className="about-box">
-              <p>{'>'} Hello! I'm a passionate full-stack web developer with expertise in building scalable web applications. I love turning complex problems into simple, beautiful, and intuitive solutions.</p>
-              <p>{'>'} With several years of development experience , I've worked on projects ranging from e-commerce platforms to real-time applications, always focusing on performance, user experience, and maintainable code.</p>
-              <p>{'>'} When I'm not coding, you'll find me exploring new technologies or sharing knowledge with the developer community.</p>
-            </div>
+            <SectionTitle num="01">ABOUT_ME</SectionTitle>
+            <Window title="~/about.txt">
+              <div className="about-text">
+                <p>{'>'} Hello! I'm a passionate full-stack web developer with expertise in building scalable web applications. I love turning complex problems into simple, beautiful, and intuitive solutions.</p>
+                <p>{'>'} With several years of development experience, I've worked on projects ranging from e-commerce platforms to real-time applications, always focusing on performance, user experience, and maintainable code.</p>
+                <p>{'>'} When I'm not coding, you'll find me exploring new technologies or sharing knowledge with the developer community.</p>
+              </div>
+            </Window>
           </div>
         </section>
 
         <section id="skills">
           <div className="skills-container">
-            <h2 className="neon-text" style={{ fontSize: 'clamp(28px, 7vw, 48px)', fontWeight: 'bold', marginBottom: '48px', textAlign: 'center' }}>
-              TECH_STACK
-            </h2>
+            <SectionTitle num="02">TECH_STACK</SectionTitle>
             <div className="skills-grid">
-              {skills.map((skill, index) => (
-                <div
-                  key={skill}
-                  className="skill-card"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  {skill}
-                </div>
+              {skillGroups.map((group, groupIndex) => (
+                <Window key={group.name} title={`~/skills/${group.name}`} className="skill-group">
+                  <div className="skill-chips">
+                    {group.skills.map((skill, index) => (
+                      <span
+                        key={skill}
+                        className="skill-chip"
+                        style={{ animationDelay: `${groupIndex * 0.2 + index * 0.06}s` }}
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </Window>
               ))}
             </div>
           </div>
@@ -132,30 +171,42 @@ function App() {
 
         <section id="projects">
           <div className="projects-container">
-            <h2 className="neon-text" style={{ fontSize: 'clamp(28px, 7vw, 48px)', fontWeight: 'bold', marginBottom: '48px', textAlign: 'center' }}>
-              FEATURED_PROJECTS
-            </h2>
+            <SectionTitle num="03">FEATURED_PROJECTS</SectionTitle>
             <div className="projects-grid">
               {projects.map((project, index) => (
                 <div
                   key={project.title}
                   className="project-card"
-                  style={{ animationDelay: `${index * 0.2}s` }}
+                  style={{ animationDelay: `${index * 0.15}s` }}
                   onMouseMove={tilt}
                   onMouseLeave={resetTilt}
                 >
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
-                  <div className="tech-tags">
-                    {project.tech.map((tech) => (
-                      <span key={tech} className="tech-tag">
-                        {tech}
-                      </span>
-                    ))}
+                  <div className="window-bar">
+                    <span className="dot dot-red" />
+                    <span className="dot dot-yellow" />
+                    <span className="dot dot-green" />
+                    <span className="window-title">~/projects/{project.slug}</span>
                   </div>
-                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">
-                    View Project <ExternalLink style={{ width: '16px', height: '16px' }} />
-                  </a>
+                  <div className="project-body">
+                    <span className="project-num">{String(index + 1).padStart(2, '0')}</span>
+                    <h3>{project.title}</h3>
+                    <p>{project.description}</p>
+                    <div className="tech-tags">
+                      {project.tech.map((tech) => (
+                        <span key={tech} className="tech-tag">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="project-links">
+                      <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link project-link-primary">
+                        Live Demo <ExternalLink style={{ width: '16px', height: '16px' }} />
+                      </a>
+                      <a href={project.source} target="_blank" rel="noopener noreferrer" className="project-link">
+                        Source <Github style={{ width: '16px', height: '16px' }} />
+                      </a>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -164,28 +215,18 @@ function App() {
 
         <section id="contact">
           <div className="contact-container">
-            <h2 className="neon-text" style={{ fontSize: 'clamp(28px, 7vw, 48px)', fontWeight: 'bold', marginBottom: '32px' }}>
-              GET_IN_TOUCH
-            </h2>
-            <p style={{ fontSize: 'clamp(16px, 4vw, 20px)', marginBottom: '48px', color: '#00dd2f' }}>
+            <SectionTitle num="04">GET_IN_TOUCH</SectionTitle>
+            <p className="contact-lead">
               Let's collaborate on your next project
             </p>
-            <div className="contact-box">
+            <Window title="~/contact.sh">
               <div className="social-links">
-                <a
-                  href="mailto:shehatacs9001@gmail.com"
-                  className="social-link"
-                >
-                  <Mail style={{ width: '48px', height: '48px' }} className="neon-glow-hover" />
+                <a href="mailto:shehatacs9001@gmail.com" className="social-link">
+                  <Mail style={{ width: '40px', height: '40px' }} />
                   <span>Email</span>
                 </a>
-                <a
-                  href="https://github.com/shehatacs2019102"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-link"
-                >
-                  <Github style={{ width: '48px', height: '48px' }} className="neon-glow-hover" />
+                <a href={GITHUB} target="_blank" rel="noopener noreferrer" className="social-link">
+                  <Github style={{ width: '40px', height: '40px' }} />
                   <span>GitHub</span>
                 </a>
                 <a
@@ -194,20 +235,20 @@ function App() {
                   rel="noopener noreferrer"
                   className="social-link"
                 >
-                  <Linkedin style={{ width: '48px', height: '48px' }} className="neon-glow-hover" />
+                  <Linkedin style={{ width: '40px', height: '40px' }} />
                   <span>LinkedIn</span>
                 </a>
               </div>
-              <button className="contact-button">
+              <a href="mailto:shehatacs9001@gmail.com" className="contact-button">
                 SEND MESSAGE
-              </button>
-            </div>
+              </a>
+            </Window>
           </div>
         </section>
       </main>
 
       <footer>
-        <p>Built with React & CSS</p>
+        <p>&copy; {new Date().getFullYear()} Abdelrahman Shehata · Built with React &amp; CSS</p>
       </footer>
     </div>
   );
